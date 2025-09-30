@@ -29,14 +29,10 @@ export default function DeployPage() {
   const [deployedServerId, setDeployedServerId] = useState<string | null>(null)
 
   const pollProgress = async (progressUrl: string) => {
-    const fullUrl = `http://194.238.16.252:3000${progressUrl}`
+    const fullUrl = `/api/mc${progressUrl}`
 
     try {
-      const response = await fetch(fullUrl, {
-        headers: {
-          "x-api-key": "niggawhathappend87w3",
-        },
-      })
+      const response = await fetch(fullUrl)
 
       if (!response.ok) {
         throw new Error(`Progress check failed: ${response.status}`)
@@ -94,11 +90,10 @@ export default function DeployPage() {
     }
 
     try {
-      const res = await fetch("http://194.238.16.252:3000/api/deploy", {
+      const res = await fetch("/api/mc/deploy", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": "niggawhathappend87w3",
         },
         body: JSON.stringify(body),
       })
